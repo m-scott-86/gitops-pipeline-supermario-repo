@@ -28,9 +28,9 @@ jobs:
       - name: Verify image tarball was created
         run: ls -lh $GITHUB_WORKSPACE/supermariolatestdockerimage.tar
 
-      - name: Run Trivy vulnerability scanner in tarball mode
+      - name: Run Trivy vulnerability scanner on image
         uses: aquasecurity/trivy-action@master
         with:
-          input: /github/workspace/supermariolatestdockerimage.tar
+          image-ref: docker.io/mskot/supermariogitopsproject:${{ steps.version.outputs.VERSION }}
           exit-code: "1"
           severity: "CRITICAL,HIGH"
